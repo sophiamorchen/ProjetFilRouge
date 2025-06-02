@@ -11974,4 +11974,40 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+}
+/*
+- le footer reste en bas,
+- prenne toute la place, 
+- le texte ok ! : 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+// nous devioons ajouter cela car sinon le texte passait derriere! 
+main {
+    margin-bottom: 250px;
+}
+
+footer.footer {
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  margin-bottom: 250px;
+}
+
+footer.footer {
+  padding: 15px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }/*# sourceMappingURL=main.css.map */

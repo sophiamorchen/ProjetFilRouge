@@ -1,2 +1,42 @@
 @import url("/node_modules/bootstrap-icons/font/bootstrap-icons.css");
 @import 'custom';
+
+// ceci est LE code pour que 
+/*
+- le footer reste en bas,
+- prenne toute la place, 
+- le texte ok ! : 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+// nous devioons ajouter cela car sinon le texte passait derriere! 
+main {
+    margin-bottom: 250px;
+}
+
+footer.footer {
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+*/
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+// nous devioons ajouter cela car sinon le texte passait derriere! 
+main {
+    margin-bottom: 250px;
+}
+
+footer.footer {
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
