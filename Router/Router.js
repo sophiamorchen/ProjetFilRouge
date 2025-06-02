@@ -6,16 +6,18 @@ const route404 = new Route("404", "Page introuvable", "/pages/404.html");
 
 // Fonction pour récupérer la route correspondant à une URL donnée
 const getRouteByUrl = (url) => {
-    let currentRoute = null// Parcours toutes les routes pour trouver la correspondance 
+    let currentRoute = null
+    // Parcours toutes les routes pour trouver la correspondance 
     allRoutes.forEach((element) => {
         if (element.url === url) { 
             currentRoute = element;
         }
     });
     // Si aucune correspondance n'est trouvée, on retourne la route 404
-    if (currentRoute != null) {
-        return currentRoute || route404
-    }
+    return currentRoute || route404;
+    // if (currentRoute != null) {
+    //     return currentRoute || route404
+    // }
     // 👉 Bonus : tu peux simplifier avec `return currentRoute || route404`
 }
 
