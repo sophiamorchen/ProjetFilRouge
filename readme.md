@@ -70,3 +70,37 @@ Après le chargement, le système met à jour le titre de la page en combinant l
 
 Ce système de routage facilite la gestion dynamique des vues, permettant une navigation fluide et modulaire en fonction des URL.  
 Il sépare clairement la configuration des routes, la logique de chargement, et l'affichage des contenus, pour un développement organisé et performant.
+
+## Import de bootstrap / puis custom
+
+## 1. Bootstrap et les fichiers CSS/SCSS
+- Bootstrap officiel propose un fichier CSS minifié (`bootstrap.min.css`) prêt à l'emploi.
+- Le fichier `custom.scss` sert à personnaliser Bootstrap en modifiant ses variables avant de compiler ton propre CSS.
+- Si tu importes `bootstrap.min.css` **et** un CSS compilé à partir de `custom.scss`, tu risques d'avoir des styles doublons ou des conflits.
+- En général, tu choisis soit le fichier CSS officiel minifié, soit ta version compilée à partir de SCSS personnalisé.
+
+## 2. Pourquoi modifier les variables avant import SCSS ?
+- En SCSS, les variables doivent être définies **avant** d'importer Bootstrap pour qu'elles prennent effet.
+- Exemple : définir `$primary: #906427;` avant `@import "bootstrap";` dans le _custom.scss pour changer la couleur principale.
+
+## 3. Utilisation de npm et package.json
+- `package.json` sert à gérer les dépendances de ton projet (dont Bootstrap si installé via npm).
+- `npm install` installe les paquets listés dans `package.json`.
+- `npm init` crée un nouveau `package.json`, ce n'est pas obligatoire si tu as déjà un projet avec ce fichier.
+- Le fichier `package.json` est surtout utile pour le développeur, pas pour le client final.
+
+## 4. Inclusion de Bootstrap Icons
+- Bootstrap Icons ont leur propre CSS (`bootstrap-icons.css`), séparé du CSS Bootstrap.
+- Il faut inclure le CSS des icônes à part, car elles ne sont pas dans `bootstrap.min.css`.
+
+## 5. Erreurs liées aux préfixes CSS (-webkit- etc.)
+- Ces erreurs sont des avertissements sur la compatibilité navigateur.
+- En production, ce n’est généralement pas bloquant, mais il est conseillé d’utiliser des outils comme Autoprefixer pour gérer ça automatiquement.
+
+## 6. Ordre des styles dans CSS
+- Certaines propriétés doivent être listées dans un ordre précis (préfixées puis standard).
+- Exemple : `text-align: -webkit-match-parent;` puis `text-align: match-parent;`
+
+## 7. Résumé sur le href="/" dans un lien HTML
+- `href="/"` cible la racine du site (la page d'accueil).
+- Le comportement dépend du serveur ou du routeur utilisé.
