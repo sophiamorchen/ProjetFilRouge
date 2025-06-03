@@ -23,26 +23,34 @@ const getRouteByUrl = (url) => {
 
 // Fonction pour chagrer le contenu de la page
 const LoadContentPage = async () => {
+    const main = document.getElementById("main-page")
+    main.classList.add("fade-out")
     const path = window.location.pathname// récupération de l'URL actuelle
     const actualRoute = getRouteByUrl(path)
     // Récupération du contenu HTML de la route
     const html = await fetch(actualRoute.pathHtml).then((data) => data.text())
     // Ajout du contenu HTML à l'élément avec l'ID "main-page"
-    document.getElementById("main-page").innerHTML = html
-    // Ajout du contenu JS
-    if(actualRoute.pathJs != "") {
-        // Création d'une balise script
-        var scriptTag = document.createElement("script")
-        scriptTag.setAttribute("type", "text/javascript")
-        scriptTag.setAttribute("src", actualRoute.pathJs)
+    setTimeout(() => {
+        main.innerHTML = html
+        main.classList.remove("fade-out")
+        main.classList.add("fade-in")
 
-        // Ajout de la balise script au corps du document
-        document.body.appendChild(scriptTag)
-    }
-    // Changement du titre de la page
-    document.title = actualRoute.title + " -" + websiteName
-    // 👉 Ajout : mieux avec un espace " - " (ton code est correct ici)
-    // 👉 Ajout : tu pourrais faire `${actualRoute.title} - ${websiteName}` pour plus de lisibilité
+        // Ajout du contenu JS
+        if(actualRoute.pathJs != "") {
+            // Création d'une balise script
+            var scriptTag = document.createElement("script")
+            scriptTag.setAttribute("type", "text/javascript")
+            scriptTag.setAttribute("src", actualRoute.pathJs)
+            // Ajout de la balise script au corps du document
+            document.body.appendChild(scriptTag)
+        }
+        // Changement du titre de la page
+        document.title = `${actualRoute.title} - ${websiteName}`
+        //Nettoyage : retire la classe parès transition
+        setTimeout(() => {
+            main.classList.remove("fade-in")
+        }, 300);
+    }, 300);
 }
 
 // Fonction pour gérer les événements du routage (clic sur les liens)

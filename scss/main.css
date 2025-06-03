@@ -12005,6 +12005,21 @@ main {
   margin-bottom: 250px;
 }
 
+#main-page {
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: scale(0.98);
+}
+
+.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
 footer.footer {
   padding: 15px;
   position: absolute;
@@ -12044,4 +12059,25 @@ p {
 
 .text-justify {
   text-align: justify;
+}
+
+.image-card {
+  position: relative;
+}
+.image-card:hover .titre-image {
+  opacity: 1;
+}
+.image-card:hover img {
+  filter: brightness(0.6);
+}
+.image-card img {
+  transition: all 0.3s;
+}
+.image-card .titre-image {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }/*# sourceMappingURL=main.css.map */

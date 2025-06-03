@@ -3,7 +3,9 @@ import Route from "./Route.js";
 // définir ici les routes de l'application
 export const allRoutes = [
     new Route("/", "Accueil", "/pages/home.html"),
-    // new Route("/Galerie", "Galerie", "/pages/galerie.html", "/js/galerie.js")
+    new Route("/galerie", "La galerie", "/pages/galerie.html"),
+    new Route("/carte", "La carte", "/pages/carte.html"),
+    new Route("/signin", "Connexion", "/pages/signin.html"),
   //  new Route("/indexfront.html", "Accueil", "/pages/home.html"), solution si route ne marche pas. voir forum.
 ]
 
