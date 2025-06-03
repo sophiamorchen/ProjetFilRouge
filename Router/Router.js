@@ -80,6 +80,4 @@ event.preventDefault() arrête la redirection classique.
 window.history.pushState({}, "", "/contact") change l'URL dans la barre d'adresse sans recharger la page.
 
 La fonction LoadContentPage() est appelée et va chercher le contenu de la page /contact, puis l'afficher dans la page actuelle, sans recharger la page.
-
-
 */
