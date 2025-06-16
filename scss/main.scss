@@ -31,17 +31,20 @@ html {
 
 // nous devioons ajouter cela car sinon le texte passait derriere! 
 main {
-    margin-bottom: 250px;
+    margin-bottom: 270px;
 }
+
 #main-page {
     opacity: 1;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .fade-out {
     opacity: 0;
     transform: scale(0.98);
 }
-.fade-in{
+
+.fade-in {
     opacity: 1;
     transform: scale(1);
 }
@@ -100,6 +103,7 @@ p {
             opacity: 1;
 
         }
+
         img {
             filter: brightness(0.6);
         }
@@ -122,6 +126,7 @@ p {
 .form-label {
     color: $primary;
 }
-#email::placeholder{
+
+#email::placeholder {
     color: $secondary
 }
