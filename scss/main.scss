@@ -99,11 +99,11 @@ p {
     position: relative;
 
     &:hover {
-        .titre-image {
+        .titre-image,
+        .action-image-buttons
+        {
             opacity: 1;
-
         }
-
         img {
             filter: brightness(0.6);
         }
@@ -114,12 +114,23 @@ p {
     }
 
     .titre-image {
-        opacity: 0;
-        transition: opacity 0.3s ease;
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .action-image-buttons{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 }
 
