@@ -12021,7 +12021,7 @@ main {
 }
 
 footer.footer {
-  padding: 15px;
+  padding: 10px;
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -12034,6 +12034,7 @@ p {
 
 .hero-scene {
   position: relative;
+  margin-bottom: 15px;
 }
 .hero-scene::before {
   content: "";
@@ -12080,4 +12081,16 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.form-label {
+  color: #906427;
+}
+
+#email::-moz-placeholder {
+  color: #b6ac97;
+}
+
+#email::placeholder {
+  color: #b6ac97;
 }/*# sourceMappingURL=main.css.map */

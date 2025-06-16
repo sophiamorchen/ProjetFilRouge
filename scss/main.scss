@@ -47,7 +47,7 @@ main {
 }
 
 footer.footer {
-    padding: 15px;
+    padding: 10px;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -60,6 +60,7 @@ p {
 
 .hero-scene {
     position: relative;
+    margin-bottom: 15px;
 
     &::before {
         content: "";
@@ -116,4 +117,11 @@ p {
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+.form-label {
+    color: $primary;
+}
+#email::placeholder{
+    color: $secondary
 }
