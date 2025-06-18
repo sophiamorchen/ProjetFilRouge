@@ -1,0 +1,65 @@
+<div class="hero-scene text-center text-white">
+    <div class="hero-scene-content">
+        <h1>Ma réservation</h1>
+    </div>
+</div>
+
+<div class="container">
+    <form>
+        <div class="mb-3">
+            <label for="nomInput" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" placeholder="Votre nom" value="John">
+        </div>
+        <div class="mb-3">
+            <label for="prenomInput" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="prenomInput" placeholder="Votre prénom" value="Doe">
+        </div>
+        <div class="mb-3">
+            <label for="allergiesInput" class="form-label">Allergies (fruits de mer, arachide) </label>
+            <input type="text" class="form-control" id="allergiesInput" placeholder="Vos allergies" value="cacahuettes">
+        </div>
+        <div class="mb-3">
+            <label for="convivesInput" class="form-label">Nombre de convives habituel</label>
+            <input type="number" class="form-control" id="convivesInput"
+                placeholder="Combien êtes vous habituellement ?" value="4">
+        </div>
+        <div class="mb-3">
+            <label for="dateInput" class="form-label">Date de votre réservation</label>
+            <input type="date" class="form-control" id="dateInput">
+        </div>
+        <div class="mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="serviceChoisi" id="dejeunerRadio">
+                <label class="form-check-label" for="dejeunerRadio">
+                    Déjeuner
+                </label>
+            </div>
+            <div class="mb-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="serviceChoisi" id="dinerRadio" checked>
+                    <label class="form-check-label" for="dinerRadio">
+                        Diner
+                    </label>    
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="selectHour" class="form-label">Heure de votre réservation</label>
+            <select class="form-select" id="selectHour">
+                <option value="1">19h00</option>
+                <option value="2">19h15</option>
+                <option value="3">19h30</option>     
+                <option value="3">19h45</option>     
+                <option value="3">20h00</option>     
+                <option value="3">20h15</option>     
+                <option value="3">20h30</option>     
+                <option value="3">20h45</option>     
+                <option value="3">21h00</option>     
+            </select>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary" type="reset" value="Reset" >Annuler</button>
+            <button class="btn btn-danger" type="submit" value="Submit" >Réserver</button>
+        </div>
+    </form>
+</div>
