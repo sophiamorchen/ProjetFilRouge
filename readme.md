@@ -104,3 +104,35 @@ Il sépare clairement la configuration des routes, la logique de chargement, et 
 ## 7. Résumé sur le href="/" dans un lien HTML
 - `href="/"` cible la racine du site (la page d'accueil).
 - Le comportement dépend du serveur ou du routeur utilisé.
+
+
+## 8. Recherche des adresses de e-mail dans un texte
+ - Recherche des adresses e-mail dans un texte
+  Expression régulière : `^[^\s@]+@[^\s@]+\.[^\s@]+$`
+
+- Dans cette expression régulière, nous cherchons à identifier une adresse e-mail. 
+- Voici ce que signifient les différents éléments de l'expression :
+
+- ^ : début de la chaîne.
+
+- [^\s@]+ : recherche un ou plusieurs caractères qui ne sont ni des espaces (\s) 
+- ni des arobases (@).
+
+- @ : recherche le caractère « @ ».
+
+- [^\s@]+ : recherche un ou plusieurs caractères qui ne sont ni des espaces (\s) 
+- ni des - arobases (@).
+- 
+- \. : recherche le caractère point (il doit être échappé car le point est un caractère 
+- spécial en expression régulière).
+
+- [^\s@]+ : recherche un ou plusieurs caractères qui ne sont ni des espaces (\s) 
+- ni des arobases (@).
+ 
+- $ : fin de la chaîne.
+ 
+- Ce regex vérifie donc que l'adresse e-mail a au moins un caractère avant 
+- et après le « @ » - et qu'il y a un point entre deux séquences de caractères.
+ 
+- Vous pouvez avoir plus d’informations sur ce regex sur ce lien 
+- notamment l’onglet - ‘explanation’ à droite : regular expressions 101
