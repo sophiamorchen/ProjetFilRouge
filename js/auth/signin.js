@@ -9,8 +9,9 @@ function checkCredentials() {
     if (mailInput.value == "test@test.com" && pwdInput.value == 123){
         // il faudra récupérer le vrai token
         const token = "bfiafgbcnluirecgnaumaumaumaumelchgc"
-        setToken(token)
         // placer ce token en cookie
+        setToken(token)
+        setCookie(roleCookieName, "client", 7)
         window.location.replace("/")
     } else {
         mailInput.classList.add("is-invalid")

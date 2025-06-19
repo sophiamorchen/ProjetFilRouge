@@ -1,11 +1,17 @@
 const tokenCookieName = "accessToken"
 const signoutBtn = document.getElementById('signout-btn')
+const roleCookieName = "role"
 
 signoutBtn.addEventListener('click', signout)
 
+function getRole() {
+    return getCookie(roleCookieName)
+}
+
 function signout() {
     eraseCookie(tokenCookieName)
-    // ajouter une alert(êtes vous sur de vouloir vous déconnecter?)
+    eraseCookie(roleCookieName)
+    // 1. À faire: ajouter une alert(êtes vous sur de vouloir vous déconnecter?)
     window.location.reload()
 }
 function setToken(token) {
@@ -84,8 +90,44 @@ function isConnected() {
 
 }
 
-if(isConnected()) {
-    alert("je suis on")
-} else {
-    alert("je suis off")
+/*
+Nous avons 4 cas de consomateurs de notre site : 
+disconnected
+connected 
+    admin
+    client
+*/
+function showAndHideElementsForRoles() {
+    const userConnected = isConnected()
+    const role = getRole()
+
+    let allElementsToEdit = document.querySelectorAll('[data-show]')
+
+    allElementsToEdit.forEach(element => {
+        switch(element.dataset.show){
+            case 'disconnected':
+                if(userConnected){
+                    element.classList.add("d-none")
+                }
+                break
+            case 'connected':
+                if(!userConnected){
+                    element.classList.add("d-none")
+                }
+                break
+            case 'admin':
+                if (!userConnected || role != "admin") {
+                    element.classList.add("d-none")
+                }
+                break
+            case 'client':
+                if (!userConnected || role != "client") {
+                    element.classList.add("d-none")
+                }
+                break
+        }
+    });
+        
+
+
 }

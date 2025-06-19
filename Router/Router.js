@@ -2,7 +2,7 @@ import Route from "./Route.js"
 import { allRoutes, websiteName } from "./allRoutes.js" 
 
 // Création d'une route pour la page 404 (page introuvable)
-const route404 = new Route("404", "Page introuvable", "/pages/404.html");
+const route404 = new Route("404", "Page introuvable", "/pages/404.html", []);
 
 // Fonction pour récupérer la route correspondant à une URL donnée
 const getRouteByUrl = (url) => {
@@ -27,6 +27,38 @@ const LoadContentPage = async () => {
     main.classList.add("fade-out")
     const path = window.location.pathname// récupération de l'URL actuelle
     const actualRoute = getRouteByUrl(path)
+
+    // Récupération du tableau des rôles autorisés pour la route actuelle
+    const allRolesArray = actualRoute.authorize;
+
+    // Si la route a des règles d'accès spécifiques (tableau non vide)
+    if (allRolesArray.length > 0) {
+
+        // Vérifie si la route est réservée uniquement aux utilisateurs non connectés
+        if (allRolesArray.includes("disconnected")) {
+
+            // Si l'utilisateur est connecté (alors qu'il ne devrait pas l'être)
+            if (isConnected()) {
+
+                // Redirection vers la page d'accueil pour empêcher l'accès
+                window.location.replace("/");
+            }
+        } else {
+            // Pour les pages réservées aux rôles spécifiques (ex: "client", "admin")
+
+            // On récupère le rôle actuel de l'utilisateur connecté
+            const roleUser = getRole();
+
+            // Si le rôle de l'utilisateur n'est pas inclus dans les rôles autorisés
+            if (!allRolesArray.includes(roleUser)) {
+
+                // On redirige vers la page d'accueil pour empêcher l'accès
+                window.location.replace("/");
+            }
+        }
+    }
+    // Si le tableau est vide, cela signifie que la page est accessible à tout le monde, donc aucune vérification n'est nécessaire.
+
     // Récupération du contenu HTML de la route
     const html = await fetch(actualRoute.pathHtml).then((data) => data.text())
     // Ajout du contenu HTML à l'élément avec l'ID "main-page"
@@ -46,6 +78,9 @@ const LoadContentPage = async () => {
         }
         // Changement du titre de la page
         document.title = `${actualRoute.title} - ${websiteName}`
+
+        // Afficher et masquer les éléments en fonction du rôle
+        showAndHideElementsForRoles() 
         //Nettoyage : retire la classe parès transition
         setTimeout(() => {
             main.classList.remove("fade-in")
