@@ -5,24 +5,24 @@
 </div>
 
 <div class="container">
-    <form action="" method="post" class="signupForm">
+    <form action="" method="post" id="signupForm">
         <div class="mb-3">
             <label for="nomInput" class="form-label">Nom</label>
-            <input type="text" class="form-control" id="nomInput" placeholder="Votre nom">
+            <input type="text" class="form-control" id="nomInput" placeholder="Votre nom" name="nom">
             <div class="invalid-feedback">
                 Le nom est requis
             </div>
         </div>
         <div class="mb-3">
             <label for="prenomInput" class="form-label">Prénom</label>
-            <input type="text" class="form-control" id="prenomInput" placeholder="Votre prénom">
+            <input type="text" class="form-control" id="prenomInput" placeholder="Votre prénom" name="prenom">
             <div class="invalid-feedback">
                 Le prénom est requis
             </div>
         </div>
         <div class="mb-3">
             <label for="emailInput" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailInput" placeholder="test@email.com">
+            <input type="email" class="form-control" id="emailInput" placeholder="test@email.com" name="email">
             <div class="invalid-feedback">
                 Le mail n'est pas au bon format
             </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="mb-3">
             <label for="passwordInput" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="passwordInput">
+            <input type="password" class="form-control" id="passwordInput" name="mdp">
             <div class="invalid-feedback">
                 Le mot de passe n'est pas assez robuste : Au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.
             </div>
@@ -39,14 +39,14 @@
             </div>
         </div>
         <div class="mb-3">
-            <label for="validatePasswordInput" class="form-label">Validez votre mot de passe</label>
+            <label for="validatePasswordInput" class="form-label" name="validationMdp">Validez votre mot de passe</label>
             <input type="password" class="form-control" id="validatePasswordInput">
             <div class="invalid-feedback">
                 les mots de passe ne correspondent pas
             </div>
         </div>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary" id="btn-validation-inscription" disabled>Inscription</button>
+            <button type="button" class="btn btn-primary" id="btn-validation-inscription" disabled>Inscription</button>
         </div>
     </form>
     <div class="text-center pt-3 mb-1">

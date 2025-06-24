@@ -6,11 +6,15 @@ const inputEmail = document.getElementById('emailInput')
 const inputPassword = document.getElementById('passwordInput')
 const inputValidationPassword = document.getElementById('validatePasswordInput')
 const btnValidation = document.getElementById('btn-validation-inscription')
+const signupForm = document.getElementById('signupForm')
+
+
 inputNom.addEventListener('input', validateForm)
 inputPrenom.addEventListener('input', validateForm)
 inputEmail.addEventListener('input', validateForm)
 inputPassword.addEventListener('input', validateForm)
 inputValidationPassword.addEventListener('input', validateForm)
+btnValidation.addEventListener('click', userSubscription)
 
 function validateForm() {
     const nomOk = validateRequired(inputNom)
@@ -18,11 +22,25 @@ function validateForm() {
     const mailTrue = validateMail(inputEmail)
     const passwordOK = validatePassword(inputPassword)
     const confPwdOk = validateConfirmationPassword(inputPassword, inputValidationPassword)
+
     if(nomOk && prenomOk && mailTrue && passwordOK && confPwdOk ) {
         btnValidation.disabled = false
     } else {
         btnValidation.disabled = true
     }
+}
+
+function validateConfirmationPassword(pwdInput, confPwdInput) {
+    if(pwdInput.value === confPwdInput.value){
+        confPwdInput.classList.add('is-valid')
+        confPwdInput.classList.remove('is-invalid')
+        return true
+    } else {
+        confPwdInput.classList.add('is-invalid')
+        confPwdInput.classList.remove('is-valid')
+        return false
+    }
+    
 }
 
 function validateMail(input) {
@@ -55,18 +73,6 @@ function validatePassword(input) {
     }
 }
 
-function validateConfirmationPassword(pwdInput, confPwdInput) {
-    if(pwdInput.value === confPwdInput.value){
-        confPwdInput.classList.add('is-valid')
-        confPwdInput.classList.remove('is-invalid')
-        return true
-    } else {
-        confPwdInput.classList.add('is-invalid')
-        confPwdInput.classList.remove('is-valid')
-        return false
-    }
-    
-}
 
 function validateRequired(input){
     if(input.value.trim() !== ''){
@@ -80,4 +86,40 @@ function validateRequired(input){
     }
 }
 
+
+function userSubscription() {
+    let dataForm = new FormData(signupForm)
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+        "firstName": dataForm.get('nom'),
+        "lastName": dataForm.get('prenom'),
+        "email": dataForm.get('email'),
+        "password": dataForm.get('mdp')
+    });
+
+    const requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
+    };
+
+    fetch(apiUrl+"registration", requestOptions)
+        .then((response) => {
+            if(response.ok ){
+                return response.json()
+            } else {
+                alert('erreur l\'ors de l\'sincription')
+            }
+        })
+        .then((result) =>{
+            alert("bravo "+dataForm.get('nom') + ", l'inscription est réussie, vous vous pouvez maintenant vous connecter")
+                document.location.href ="/signin"
+                console.log(result)
+            })
+            
+        .catch((error) => console.error(error));
+}
 
