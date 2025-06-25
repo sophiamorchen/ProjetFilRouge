@@ -7,15 +7,15 @@ btnSignin.addEventListener('click', checkCredentials)
 
 function checkCredentials() {
     let dataForm = new FormData(signinForm)
-    const myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify({
+    let raw = JSON.stringify({
         "username": dataForm.get('email'),
         "password": dataForm.get('mdp')
     });
 
-    const requestOptions = {
+    let requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,

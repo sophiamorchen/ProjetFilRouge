@@ -89,17 +89,17 @@ function validateRequired(input){
 
 function userSubscription() {
     let dataForm = new FormData(signupForm)
-    const myHeaders = new Headers();
+    let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
-    const raw = JSON.stringify({
+    let raw = JSON.stringify({
         "firstName": dataForm.get('nom'),
         "lastName": dataForm.get('prenom'),
         "email": dataForm.get('email'),
         "password": dataForm.get('mdp')
     });
 
-    const requestOptions = {
+    let requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
@@ -115,8 +115,8 @@ function userSubscription() {
             }
         })
         .then((result) =>{
-            alert("bravo "+dataForm.get('nom') + ", l'inscription est réussie, vous vous pouvez maintenant vous connecter")
-                document.location.href ="/signin"
+            alert("bravo " + String(dataForm.get('nom')) + ", l'inscription est réussie...");
+            document.location.href ="/signin"
                 console.log(result)
             })
             

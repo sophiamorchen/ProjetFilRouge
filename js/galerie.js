@@ -7,7 +7,6 @@ let monImage = getImage(titre, imgSource)
 
 galerieImages.innerHTML = monImage
 
-
 function getImage(titre, urlImage) {
     titre = sanitizeHtml(titre)
     urlImage = sanitizeHtml(urlImage)

@@ -1,10 +1,9 @@
 const tokenCookieName = "accessToken"
 const signoutBtn = document.getElementById('signout-btn')
 const roleCookieName = "role"
-const apiUrl = "https://127.0.0.1:8000/api/"
+const apiUrl = "http://127.0.0.1:8000/api/"
 
 signoutBtn.addEventListener('click', signout)
-
 function getRole() {
     return getCookie(roleCookieName)
 }
@@ -28,11 +27,11 @@ function getToken() {
 // Fonction pour créer un cookie
 function setCookie(name, value, days) {
     // Variable qui contiendra la date d'expiration du cookie
-    var expires = "";
+    let expires = "";
     // Si le paramètre "days" est fourni
     if (days) {
         // Crée un objet Date représentant la date et l'heure actuelles
-        var date = new Date();
+        let date = new Date();
         // Modifie l'objet Date pour y ajouter "days" en millisecondes
         // (jours * 24 heures * 60 minutes * 60 secondes * 1000 ms)
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
@@ -48,15 +47,15 @@ function setCookie(name, value, days) {
 
 function getCookie(name) {
     // On crée la chaîne qui correspond au nom du cookie suivi d'un '='
-    var cookieName = name + "="
+    let cookieName = name + "="
 
     // On récupère tous les cookies sous forme d'un tableau, chaque cookie est séparé par un ';'
-    var cookieArray = document.cookie.split(';')
+    let cookieArray = document.cookie.split(';')
 
     // On parcourt tous les cookies
-    for (var i = 0; i < cookieArray.length; i++) {
+    for (const element of cookieArray) {
         // On récupère le cookie à l'index i
-        var cookie = cookieArray[i]
+        let cookie = element
 
         // On enlève les espaces blancs au début du cookie (trim à gauche)
         /*
@@ -65,11 +64,11 @@ function getCookie(name) {
         qui va retourner la chaîne cookie à partir du deuxième caractère jusqu'à la fin.
         On réaffecte cette nouvelle chaîne à cookie.
         */
-        while (cookie.charAt(0) == ' ') {
+        while (cookie.startsWith(' ')) {
             cookie = cookie.substring(1, cookie.length)
         }
         // Si le cookie commence par le nom recherché (ex : 'username=')
-        if (cookie.indexOf(cookieName) == 0) {
+        if (cookie.startsWith(cookieName)) {
             // On retourne la valeur du cookie, c’est-à-dire tout ce qui suit 'username='
             return cookie.substring(cookieName.length, cookie.length)
         }
@@ -83,12 +82,11 @@ function eraseCookie(name){
 }
 
 function isConnected() {
-    if(getToken() == null || getToken == undefined) {
+    if(getToken() == null || getToken() == undefined) {
         return false
     } else {
         return true
     }
-
 }
 
 /*
@@ -99,36 +97,77 @@ connected
     client
 */
 function showAndHideElementsForRoles() {
+    // Vérifie si un utilisateur est connecté (via un token)
     const userConnected = isConnected()
+
+    // Récupère le rôle actuel de l'utilisateur connecté (ex: "admin", "client")
     const role = getRole()
 
+    // Sélectionne tous les éléments HTML ayant un attribut [data-show]
     let allElementsToEdit = document.querySelectorAll('[data-show]')
 
+    // Pour chaque élément sélectionné, on va décider s'il doit être affiché ou caché
     allElementsToEdit.forEach(element => {
-        switch(element.dataset.show){
+        // On lit la valeur de l'attribut data-show pour savoir à qui cet élément est destiné
+        switch (element.dataset.show) {
             case 'disconnected':
-                if(userConnected){
+                // Si l'utilisateur est connecté, on cache les éléments destinés aux visiteurs non connectés
+                if (userConnected) {
                     element.classList.add("d-none")
                 }
                 break
             case 'connected':
-                if(!userConnected){
+                // Si l'utilisateur n'est PAS connecté, on cache les éléments destinés aux utilisateurs connectés
+                if (!userConnected) {
                     element.classList.add("d-none")
                 }
                 break
             case 'admin':
+                // Si l'utilisateur n'est pas connecté ou qu'il n'a pas le rôle admin, on cache l'élément
                 if (!userConnected || role != "admin") {
                     element.classList.add("d-none")
                 }
                 break
             case 'client':
+                // Si l'utilisateur n'est pas connecté ou qu'il n'a pas le rôle client, on cache l'élément
                 if (!userConnected || role != "client") {
                     element.classList.add("d-none")
                 }
                 break
         }
     });
-        
-
-
 }
+
+
+//incroyable fonction qui transforme notre requête en texte. Ce qui nous permet d'éviter de l'injection de code
+function sanitizeHtml(text) {
+    const tempHtml = document.createElement('div')
+    tempHtml.textContent = text
+    return tempHtml.innerHTML
+}
+
+function getInfoUser() {
+    let myHeaders = new Headers();
+    myHeaders.append("X-AUTH-TOKEN", getToken() )
+    let requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+    };
+
+    fetch(apiUrl + "account/me", requestOptions)
+        .then((response) => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                alert('erreur l\'ors de la récupération des informations utilisateur')
+            }
+        })
+        .then((result) => {
+            return result
+        })
+        .catch(error => {
+            console.error("erreur l'ors de la récupération des données", error)
+        })
+}
+
