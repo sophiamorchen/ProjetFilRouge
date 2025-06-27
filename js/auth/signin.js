@@ -1,12 +1,9 @@
-const mailInput = document.getElementById('emailInput')
-const pwdInput = document.getElementById('passwordInput')
-const btnSignin = document.getElementById('btnSignin')
-const signinForm = document.getElementById('signinForm')
+btnSignin.addEventListener('click', checkCredentials);
 
-btnSignin.addEventListener('click', checkCredentials)
+function checkCredentials(event) {
+    event.preventDefault(); // Empêche le rechargement du formulaire
 
-function checkCredentials() {
-    let dataForm = new FormData(signinForm)
+    let dataForm = new FormData(signinForm);
     let myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -22,20 +19,28 @@ function checkCredentials() {
         redirect: "follow"
     };
 
-    fetch(apiUrl+"login", requestOptions)
-        .then((response) => {
-            if (response.ok) {
-                return response.json()
-            } else {
-                mailInput.classList.add("is-invalid")
-                pwdInput.classList.add("is-invalid")            }
+    fetch(apiUrl + "login", requestOptions)
+        .then(response => {
+            if (!response.ok) {
+                // Gérer l'erreur ici et arrêter la chaîne
+                mailInput.classList.add("is-invalid");
+                pwdInput.classList.add("is-invalid");
+                // Optionnel : afficher un message d'erreur visible à l'utilisateur
+                throw new Error(`Erreur HTTP ${response.status}`);
+            }
+            return response.json();
         })
-        .then((result) => {
-            const token = result.apiToken
-            // placer ce token en cookie
-            setToken(token)
-            setCookie(roleCookieName, result.roles[0], 7)
-            window.location.replace("/")
+        .then(result => {
+            if (!result.apiToken) {
+                throw new Error("Pas de token reçu !");
+            }
+            const token = result.apiToken;
+            setToken(token);
+            setCookie(roleCookieName, result.roles[0], 7);
+            window.location.replace("/");
         })
-        .catch((error) => console.error(error));
+        .catch(error => {
+            console.error("Erreur lors de la connexion :", error);
+            // Tu peux ici afficher un message d'erreur utilisateur aussi
+        });
 }
