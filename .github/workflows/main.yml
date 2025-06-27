@@ -30,7 +30,6 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/bootstrap/scss/**
-            **/node_modules/js/**
-            **/node_modules/bootstrap-icons/icons/**
+            **/node_modules/**
+
 
