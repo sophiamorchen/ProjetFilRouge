@@ -19,7 +19,7 @@ function checkCredentials(event) {
         redirect: "follow"
     };
 
-    fetch("https://127.0.0.1:8000/api/login", requestOptions)
+    fetch("http://127.0.0.1:8000/api/login", requestOptions)
         .then(response => {
             if (!response.ok) {
                 // Gérer l'erreur ici et arrêter la chaîne
