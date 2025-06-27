@@ -5,7 +5,7 @@ const images = [
     { titre: "Pasta pesto", url: "/img/pastaPesto.jpg" },
     { titre: "Saumon grillé", url: "/img/saumon.png" },
     { titre: "Feuilleté framboise, creme vannille", url: "/img/feuilleteDessert.jpg" },
-    { titre: "Tartare de poulpe", url: "/img/tartare" },
+    { titre: "Tartare de poulpe", url: "/img/tartare.jpg" },
     { titre: "Plat végé", url: "/img/veggieBowl.jpg" },
 
 ]
