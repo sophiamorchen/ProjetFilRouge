@@ -3,7 +3,11 @@ const galerieImages = document.getElementById('allImages')
 const images = [
     { titre: "Lasagnes à la bolognese", url: "/img/lasagnes.jpg" },
     { titre: "Pasta pesto", url: "/img/pastaPesto.jpg" },
-    { titre: "Saumon grillé", url: "/img/saumon.png" }
+    { titre: "Saumon grillé", url: "/img/saumon.png" },
+    { titre: "Feuilleté framboise, creme vannille", url: "/img/feuilleteDessert.jpg" },
+    { titre: "Tartare de poulpe", url: "/img/tartare" },
+    { titre: "Plat végé", url: "/img/veggieBowl.jpg" },
+
 ]
 
 function sanitizeHtml(str) {
@@ -21,31 +25,25 @@ function getImage(titre, urlImage) {
             <img src="${urlImage}" class="w-100 rounded" alt="Image: ${titre}">
             <p class="titre-image">${titre}</p>
             <div class="action-image-buttons" data-show="admin">
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editionPhotoModal" data-image-title="${titre}" data-image-url="${urlImage}">
-                <i class="bi bi-pencil"></i>
-            </button>
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#deletePhotoModal" data-image-title="${titre}" data-image-url="${urlImage}">
-                <i class="bi bi-trash"></i>
-            </button>
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#editionPhotoModal" data-image-title="${titre}" data-image-url="${urlImage}">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#deletePhotoModal" data-image-title="${titre}" data-image-url="${urlImage}">
+                    <i class="bi bi-trash"></i>
+                </button>
             </div>
         </div>
-        </div>
+    </div>
     `
 }
 
 galerieImages.innerHTML = images.map(img => getImage(img.titre, img.url)).join('')
 
-// Ensuite, tu peux écouter l'ouverture de la modale pour injecter les données dynamiquement
-
 const editionModal = document.getElementById('editionPhotoModal')
 editionModal.addEventListener('show.bs.modal', event => {
-    const button = event.relatedTarget // Bouton qui a déclenché la modale
+    const button = event.relatedTarget
     const titre = button.getAttribute('data-image-title')
-    const url = button.getAttribute('data-image-url')
-
-    // Remplir les inputs dans la modale
     editionModal.querySelector('#namePhotoInput').value = titre
-    // Pour l'image, tu peux afficher un aperçu si besoin
 })
 
 const deleteModal = document.getElementById('deletePhotoModal')
