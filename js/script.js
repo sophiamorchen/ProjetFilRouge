@@ -1,7 +1,7 @@
 const tokenCookieName = "accessToken"
 const signoutBtn = document.getElementById('signout-btn')
 const roleCookieName = "role"
-const apiUrl = "https://morchen.alwaysdata.net/api/"
+// const apiUrl = "https://morchen.alwaysdata.net/api/"
 
 signoutBtn.addEventListener('click', signout)
 function getRole() {

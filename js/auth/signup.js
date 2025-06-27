@@ -106,7 +106,7 @@ function userSubscription() {
         redirect: "follow"
     };
 
-    fetch(apiUrl+"registration", requestOptions)
+    fetch("https://127.0.0.1:8000/api/registration", requestOptions)
         .then((response) => {
             if(response.ok ){
                 return response.json()
