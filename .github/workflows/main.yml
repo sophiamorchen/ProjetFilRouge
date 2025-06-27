@@ -10,6 +10,14 @@ jobs:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
+      - name: 🧰 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.15.0'  # ta version locale exacte
+
+      - name: 📦 Install npm dependencies 
+        run: npm install
+
       - name: 📂 Sync files via FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
